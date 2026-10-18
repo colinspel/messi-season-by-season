@@ -1,0 +1,33 @@
+season,age,series,value
+2005/2006,18,Actual: non-penalty goals + assists per 90,0.676
+2006/2007,19,Actual: non-penalty goals + assists per 90,0.702
+2007/2008,20,Actual: non-penalty goals + assists per 90,0.728
+2008/2009,21,Actual: non-penalty goals + assists per 90,1.071
+2009/2010,22,Actual: non-penalty goals + assists per 90,1.321
+2010/2011,23,Actual: non-penalty goals + assists per 90,1.371
+2011/2012,24,Actual: non-penalty goals + assists per 90,1.492
+2012/2013,25,Actual: non-penalty goals + assists per 90,1.707
+2013/2014,26,Actual: non-penalty goals + assists per 90,1.149
+2014/2015,27,Actual: non-penalty goals + assists per 90,1.419
+2015/2016,28,Actual: non-penalty goals + assists per 90,1.218
+2016/2017,29,Actual: non-penalty goals + assists per 90,1.231
+2017/2018,30,Actual: non-penalty goals + assists per 90,1.272
+2018/2019,31,Actual: non-penalty goals + assists per 90,1.43
+2019/2020,32,Actual: non-penalty goals + assists per 90,1.165
+2020/2021,33,Actual: non-penalty goals + assists per 90,1.053
+2005/2006,18,Expected: npxG + xA per 90,0.621
+2006/2007,19,Expected: npxG + xA per 90,0.571
+2007/2008,20,Expected: npxG + xA per 90,0.477
+2008/2009,21,Expected: npxG + xA per 90,0.788
+2009/2010,22,Expected: npxG + xA per 90,0.856
+2010/2011,23,Expected: npxG + xA per 90,0.919
+2011/2012,24,Expected: npxG + xA per 90,1.022
+2012/2013,25,Expected: npxG + xA per 90,0.765
+2013/2014,26,Expected: npxG + xA per 90,0.854
+2014/2015,27,Expected: npxG + xA per 90,0.927
+2015/2016,28,Expected: npxG + xA per 90,0.875
+2016/2017,29,Expected: npxG + xA per 90,0.917
+2017/2018,30,Expected: npxG + xA per 90,0.975
+2018/2019,31,Expected: npxG + xA per 90,0.898
+2019/2020,32,Expected: npxG + xA per 90,0.799
+2020/2021,33,Expected: npxG + xA per 90,0.812

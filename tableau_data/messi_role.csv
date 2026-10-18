@@ -1,0 +1,69 @@
+season,season_idx,metric,value,low_minutes
+2004/2005,1,Dribbles won per 90,3.922,Under 900 min
+2004/2005,1,Progressive passes per 90,0.98,Under 900 min
+2004/2005,1,Key passes per 90,0.98,Under 900 min
+2004/2005,1,Shots per 90,5.882,Under 900 min
+2005/2006,2,Dribbles won per 90,7.531,Full season
+2005/2006,2,Progressive passes per 90,2.51,Full season
+2005/2006,2,Key passes per 90,1.255,Full season
+2005/2006,2,Shots per 90,3.669,Full season
+2006/2007,3,Dribbles won per 90,7.194,Full season
+2006/2007,3,Progressive passes per 90,3.465,Full season
+2006/2007,3,Key passes per 90,1.623,Full season
+2006/2007,3,Shots per 90,2.763,Full season
+2007/2008,4,Dribbles won per 90,8.869,Full season
+2007/2008,4,Progressive passes per 90,5.094,Full season
+2007/2008,4,Key passes per 90,1.728,Full season
+2007/2008,4,Shots per 90,2.956,Full season
+2008/2009,5,Dribbles won per 90,6.357,Full season
+2008/2009,5,Progressive passes per 90,5.701,Full season
+2008/2009,5,Key passes per 90,2.349,Full season
+2008/2009,5,Shots per 90,3.835,Full season
+2009/2010,6,Dribbles won per 90,7.65,Full season
+2009/2010,6,Progressive passes per 90,4.424,Full season
+2009/2010,6,Key passes per 90,1.813,Full season
+2009/2010,6,Shots per 90,4.946,Full season
+2010/2011,7,Dribbles won per 90,7.557,Full season
+2010/2011,7,Progressive passes per 90,5.424,Full season
+2010/2011,7,Key passes per 90,2.042,Full season
+2010/2011,7,Shots per 90,4.449,Full season
+2011/2012,8,Dribbles won per 90,6.716,Full season
+2011/2012,8,Progressive passes per 90,5.97,Full season
+2011/2012,8,Key passes per 90,2.399,Full season
+2011/2012,8,Shots per 90,5.277,Full season
+2012/2013,9,Dribbles won per 90,5.647,Full season
+2012/2013,9,Progressive passes per 90,5.319,Full season
+2012/2013,9,Key passes per 90,1.543,Full season
+2012/2013,9,Shots per 90,5.188,Full season
+2013/2014,10,Dribbles won per 90,6.857,Full season
+2013/2014,10,Progressive passes per 90,5.778,Full season
+2013/2014,10,Key passes per 90,2.471,Full season
+2013/2014,10,Shots per 90,5.639,Full season
+2014/2015,11,Dribbles won per 90,5.779,Full season
+2014/2015,11,Progressive passes per 90,7.791,Full season
+2014/2015,11,Key passes per 90,2.193,Full season
+2014/2015,11,Shots per 90,4.798,Full season
+2015/2016,12,Dribbles won per 90,5.739,Full season
+2015/2016,12,Progressive passes per 90,8.079,Full season
+2015/2016,12,Key passes per 90,2.372,Full season
+2015/2016,12,Shots per 90,5.065,Full season
+2016/2017,13,Dribbles won per 90,5.385,Full season
+2016/2017,13,Progressive passes per 90,7.508,Full season
+2016/2017,13,Key passes per 90,2.339,Full season
+2016/2017,13,Shots per 90,5.447,Full season
+2017/2018,14,Dribbles won per 90,4.828,Full season
+2017/2018,14,Progressive passes per 90,7.054,Full season
+2017/2018,14,Key passes per 90,2.371,Full season
+2017/2018,14,Shots per 90,5.724,Full season
+2018/2019,15,Dribbles won per 90,3.94,Full season
+2018/2019,15,Progressive passes per 90,8.135,Full season
+2018/2019,15,Key passes per 90,2.86,Full season
+2018/2019,15,Shots per 90,5.434,Full season
+2019/2020,16,Dribbles won per 90,5.464,Full season
+2019/2020,16,Progressive passes per 90,7.525,Full season
+2019/2020,16,Key passes per 90,2.568,Full season
+2019/2020,16,Shots per 90,4.748,Full season
+2020/2021,17,Dribbles won per 90,4.241,Full season
+2020/2021,17,Progressive passes per 90,7.743,Full season
+2020/2021,17,Key passes per 90,2.192,Full season
+2020/2021,17,Shots per 90,5.551,Full season

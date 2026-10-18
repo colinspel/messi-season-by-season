@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Messi, Season by Season</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#fcfcfb;--card:#ffffff;--ink:#0b0b0b;--ink2:#52514e;--muted:#8a8983;
+  --line:#e6e5e0;--rule:#c9c8c1;--track:#eeede8;
+  --blue:#2a78d6;--orange:#eb6834;--gray:#b8b7b0;--pitch:#c9c8c1;
+  --h0:#fcfcfb;--h1:#cde2fb;--h2:#86b6ef;--h3:#3987e5;--h4:#1c5cab;--h5:#0d366b;
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme:dark;
+    --bg:#1a1a19;--card:#222220;--ink:#f0efec;--ink2:#c3c2b7;--muted:#8f8e86;
+    --line:#33332f;--rule:#4a4a45;--track:#2c2c29;
+    --blue:#3987e5;--orange:#d95926;--gray:#6b6a64;--pitch:#4a4a45;
+    --h0:#222220;--h1:#0d366b;--h2:#184f95;--h3:#256abf;--h4:#5598e7;--h5:#b7d3f6;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;-webkit-text-size-adjust:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 16px 40px}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.06;margin:0 0 8px;letter-spacing:-.015em}
+.sub{color:var(--ink2);margin:0 0 16px;max-width:800px}
+h2{font-size:19px;margin:0 0 4px}
+h3{font-size:15px;margin:0 0 2px}
+.lede{color:var(--ink2);margin:0 0 12px;font-size:14px;max-width:780px}
+.note{color:var(--muted);font-size:12.5px;margin:0 0 8px}
+section{margin-top:28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:900px){.g64{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}.g2{grid-template-columns:1fr 1fr}}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 18px}
+@media(min-width:760px){.kpis{grid-template-columns:repeat(6,1fr)}}
+.kpi{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--card)}
+.kpi b{display:block;font-size:clamp(19px,5vw,25px);line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi span{color:var(--ink2);font-size:12.5px}
+.ctrl{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:16px}
+.ctrlrow{display:flex;align-items:center;gap:12px}
+.season{font-size:24px;font-weight:800;font-variant-numeric:tabular-nums;min-width:118px}
+.age{color:var(--ink2);font-size:13px;white-space:nowrap}
+input[type=range]{flex:1;accent-color:var(--blue);height:28px}
+button.play{all:unset;cursor:pointer;width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-size:14px;flex:none}
+button.play:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.stats{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13.5px;color:var(--ink2);margin:4px 0 10px}
+.stats b{color:var(--ink);font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:99px;background:var(--track);color:var(--ink2)}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin:0 0 8px}
+.seg button{all:unset;cursor:pointer;padding:5px 12px;font-size:13px;color:var(--ink2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{fill:var(--ink2);font-size:11px;font-family:inherit}
+.hit{cursor:pointer}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--ink2);margin:6px 0 0;align-items:center}
+.sw{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.ramp{display:inline-flex;height:10px;border-radius:3px;overflow:hidden;vertical-align:-1px;margin:0 5px}
+.ramp i{width:14px;display:block}
+.small{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+@media(min-width:900px){.small{grid-template-columns:repeat(4,1fr)}}
+.callout{border-left:3px solid var(--blue);padding:8px 12px;background:var(--track);border-radius:0 8px 8px 0;font-size:14px;margin:10px 0 0}
+details{margin-top:28px;border-top:1px solid var(--line);padding-top:12px;color:var(--ink2);font-size:13.5px}
+summary{cursor:pointer;font-weight:600;color:var(--ink)}
+details li{margin:5px 0}
+footer{margin-top:18px;color:var(--muted);font-size:12px}
+#tip{position:fixed;pointer-events:none;z-index:20;background:var(--ink);color:var(--bg);font-size:12.5px;line-height:1.4;padding:8px 10px;border-radius:8px;max-width:260px;opacity:0;transition:opacity .08s}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Messi, Season by Season</h1>
+<p class="sub" id="sub"></p>
+<div class="kpis" id="kpis"></div>
+
+<div class="ctrl">
+  <div class="ctrlrow">
+    <button class="play" id="play" aria-label="Play through seasons">&#9654;</button>
+    <span class="season" id="seasonLabel"></span>
+    <input type="range" id="slider" min="0" max="16" step="1" aria-label="Season">
+    <span class="age" id="ageLabel"></span>
+  </div>
+</div>
+
+<div class="grid g64">
+  <div class="card">
+    <h3>Where he touched the ball</h3>
+    <p class="note">Every pass, carry, reception, dribble and shot. Barcelona attack left to right; the orange dot is his average touch.</p>
+    <div id="heat"></div>
+    <div class="legend"><span>fewer<span class="ramp"><i style="background:var(--h1)"></i><i style="background:var(--h2)"></i><i style="background:var(--h3)"></i><i style="background:var(--h4)"></i><i style="background:var(--h5)"></i></span>more touches</span></div>
+    <div class="stats" id="stats" style="margin-top:12px"></div>
+    <h3 style="margin-top:10px">Right wing or centre?</h3>
+    <p class="note">Share of his touches in the right channel against the central channel, every season. The false-9 years are where the lines cross.</p>
+    <div id="channel"></div>
+    <div class="legend"><span><span class="sw" style="background:var(--orange)"></span>right channel</span><span><span class="sw" style="background:var(--blue)"></span>central channel</span></div>
+  </div>
+  <div class="card">
+    <div class="seg" role="group" aria-label="Map type"><button id="segShots" aria-pressed="true">Shots</button><button id="segKP" aria-pressed="false">Chances created</button></div>
+    <p class="note" id="mapNote"></p>
+    <div id="shotmap"></div>
+    <div class="legend" id="mapLegend"></div>
+  </div>
+</div>
+
+<section>
+  <h2>Better finisher than the model, almost every year</h2>
+  <p class="lede" id="finLede"></p>
+  <div class="card"><div id="finChart"></div>
+    <div class="legend"><span><span class="sw" style="background:var(--blue)"></span>non-penalty goals</span><span><span class="sw" style="background:var(--card);border:2px solid var(--ink2);width:10px;height:10px"></span>non-penalty xG</span><span>Tap a season to load it above.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>From dribbler to playmaker</h2>
+  <p class="lede">The same player, four different jobs. Per 90 minutes, by season. Hollow points are seasons under 900 minutes, where per-90 numbers are noisy.</p>
+  <div class="small" id="role"></div>
+</section>
+
+<section>
+  <h2>Ageing curve</h2>
+  <p class="lede">Goal contributions per 90 against his age at the start of each season, actual and expected. Expected (non-penalty xG + xA) strips out finishing and team-mates' finishing, so it is the steadier read on his underlying level.</p>
+  <div class="card"><div id="ageChart"></div>
+    <div class="legend"><span><span class="sw" style="background:var(--blue)"></span>actual: non-penalty goals + assists per 90</span><span><span class="sw" style="background:var(--gray)"></span>expected: npxG + xA per 90</span></div>
+  </div>
+</section>
+
+<details>
+  <summary>Methods and caveats</summary>
+  <ul id="methods"></ul>
+</details>
+<footer>Data: StatsBomb Open Data (La Liga, FC Barcelona, 2004/05 to 2020/21) &middot; Built by Colin Spelman</footer>
+</div>
+<div id="tip"></div>
+
+<script>
+const D = /*DATA*/null;
+const $ = s => document.querySelector(s);
+const NS = "http://www.w3.org/2000/svg";
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function el(tag, attrs = {}, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "style") Object.assign(e.style, v); else if (k === "text") e.textContent = v; else e.setAttribute(k, v);
+  }
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function svgFor(host, w, h) { host.innerHTML = ""; return el("svg", {viewBox: `0 0 ${w} ${h}`, width: w, height: h}, host); }
+const lin = (d0, d1, r0, r1) => v => r0 + (v - d0) / (d1 - d0) * (r1 - r0);
+const fmt = (v, d = 2) => Number(v).toFixed(d);
+const expand = t => t.data.map(r => Object.fromEntries(t.columns.map((c, i) => [c, r[i]])));
+const SE = D.seasons, SH = expand(D.shots), KP = expand(D.keypasses);
+const NOISY = 900;
+let cur = SE.findIndex(s => s.season === "2011/2012"), mapMode = "shots", timer = null;
+
+const tip = $("#tip");
+function showTip(e, html) {
+  tip.innerHTML = html; tip.style.opacity = 1;
+  let l = e.clientX + 14, t = e.clientY - tip.offsetHeight - 12;
+  if (l + tip.offsetWidth > innerWidth - 8) l = e.clientX - tip.offsetWidth - 14;
+  if (t < 8) t = e.clientY + 16;
+  tip.style.left = Math.max(8, l) + "px"; tip.style.top = t + "px";
+}
+const hideTip = () => { tip.style.opacity = 0; };
+function bindTip(n, html, onClick) {
+  n.addEventListener("pointerenter", e => showTip(e, html)); n.addEventListener("pointermove", e => showTip(e, html));
+  n.addEventListener("pointerleave", hideTip);
+  n.addEventListener("click", e => { showTip(e, html); if (onClick) onClick(); e.stopPropagation(); });
+}
+document.addEventListener("click", hideTip);
+addEventListener("scroll", hideTip, {passive: true});
+
+// ---------- pitch helpers ----------
+// horizontal full pitch: screen x = sb x, screen y = sb y (attacker's left at top)
+function fullPitch(svg, k, o) {
+  const g = el("g", {fill: "none", "stroke-width": 1.1, style: {stroke: css("--pitch")}}, svg);
+  const X = x => o + x * k, Y = y => o + y * k;
+  const R = (x, y, w, h) => el("rect", {x: X(x), y: Y(y), width: w * k, height: h * k}, g);
+  R(0, 0, 120, 80); R(0, 18, 18, 44); R(102, 18, 18, 44); R(0, 30, 6, 20); R(114, 30, 6, 20); R(-1.5, 36, 1.5, 8); R(120, 36, 1.5, 8);
+  el("line", {x1: X(60), y1: Y(0), x2: X(60), y2: Y(80)}, g);
+  el("circle", {cx: X(60), cy: Y(40), r: 10 * k}, g);
+  const a = Math.acos(6 / 10), dy = 10 * Math.sin(a) * k, r = 10 * k;
+  el("path", {d: `M ${X(18)} ${Y(40) - dy} A ${r} ${r} 0 0 1 ${X(18)} ${Y(40) + dy}`}, g);
+  el("path", {d: `M ${X(102)} ${Y(40) - dy} A ${r} ${r} 0 0 0 ${X(102)} ${Y(40) + dy}`}, g);
+  return {X, Y};
+}
+// vertical half pitch (goal at top): screen x = sb y, screen y = 120 - sb x
+function halfPitch(svg, k, o) {
+  const g = el("g", {fill: "none", "stroke-width": 1.1, style: {stroke: css("--pitch")}}, svg);
+  const X = y => o + y * k, Y = x => o + (120 - x) * k;
+  const R = (x0, y0, w, h) => el("rect", {x: X(x0), y: Y(y0), width: w * k, height: h * k}, g);
+  R(0, 120, 80, 60); R(18, 120, 44, 18); R(30, 120, 20, 6); R(36, 120 + 1.5, 8, 1.5);
+  el("path", {d: `M ${X(30)} ${Y(60)} A ${10 * k} ${10 * k} 0 0 1 ${X(50)} ${Y(60)}`}, g);
+  const a = Math.acos(6 / 10), dx = 10 * Math.sin(a);
+  el("path", {d: `M ${X(40 - dx)} ${Y(102)} A ${10 * k} ${10 * k} 0 0 0 ${X(40 + dx)} ${Y(102)}`}, g);
+  return {X, Y};
+}
+
+// ---------- header ----------
+function renderTop() {
+  const sum = k => SE.reduce((a, s) => a + s[k], 0);
+  const goals = sum("goals"), np = sum("np_goals"), npxg = sum("npxg"), ast = sum("assists"), mins = sum("minutes"), m = sum("matches");
+  const beat = SE.filter(s => s.np_goals > s.npxg).length;
+  $("#sub").textContent = `Every La Liga match Lionel Messi played for Barcelona from his debut season to his last: ${m} matches, 17 seasons, one dataset. Drag the slider or press play to watch his game change.`;
+  const items = [[m, "matches"], [goals, "goals"], [ast, "assists"], [fmt(npxg, 0), "non-penalty xG"],
+                 ["+" + fmt(np - npxg, 0), "goals above xG"], [`${beat}/17`, "seasons beating xG"]];
+  $("#kpis").innerHTML = items.map(([v, l]) => `<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join("");
+  $("#finLede").textContent = `Non-penalty goals against StatsBomb's expected goals for the same shots. Messi scored ${np} from ${fmt(npxg, 0)} xG, beating the model in ${beat} of 17 seasons. A typical finisher lands close to zero over a career; ${fmt(np - npxg, 0)} goals above expectation is the clearest sign that his finishing, not just his chance volume, was elite.`;
+}
+
+// ---------- season views ----------
+function setSeason(i) {
+  cur = Math.max(0, Math.min(SE.length - 1, i));
+  $("#slider").value = cur;
+  const s = SE[cur];
+  $("#seasonLabel").textContent = s.season;
+  $("#ageLabel").textContent = `age ${Math.floor(s.age)}`;
+  $("#stats").innerHTML = `<span class="pill">${s.main_position}</span>
+    <span><b>${s.matches}</b> matches &middot; <b>${Math.round(s.minutes).toLocaleString()}</b> min</span>
+    <span>Goals <b>${s.goals}</b> (${s.pen_goals} pen)</span>
+    <span>npxG <b>${fmt(s.npxg, 1)}</b></span>
+    <span>Assists <b>${s.assists}</b> &middot; xA <b>${fmt(s.xa, 1)}</b></span>
+    <span>Dribbles won <b>${s.dribbles_won}</b></span>`;
+  renderHeat(); renderMap(); renderFin(); renderRole(); renderAge();
+}
+function renderHeat() {
+  const host = $("#heat"), W = Math.max(300, host.clientWidth), o = 6, k = (W - o * 2) / 120, H = Math.round(80 * k + o * 2);
+  const svg = svgFor(host, W, H);
+  const s = SE[cur], grid = D.heat[s.season], [GX, GY] = D.grid, cw = 120 / GX, ch = 80 / GY;
+  const max = Math.max(1, ...grid.flat());
+  const ramp = ["--h1", "--h2", "--h3", "--h4", "--h5"].map(css);
+  const gH = el("g", {}, svg);
+  grid.forEach((row, gy) => row.forEach((v, gx) => {
+    if (!v) return;
+    const t = Math.sqrt(v / max);  // sqrt keeps the outer touches visible next to hot spots
+    el("rect", {x: o + gx * cw * k, y: o + gy * ch * k, width: cw * k + 0.5, height: ch * k + 0.5,
+      style: {fill: ramp[Math.min(4, Math.floor(t * 5))]}}, gH);
+  }));
+  const {X, Y} = fullPitch(svg, k, o);
+  el("circle", {cx: X(s.avg_x), cy: Y(s.avg_y), r: 7, "stroke-width": 3, style: {fill: css("--orange"), stroke: css("--card")}}, svg);
+  el("text", {x: X(s.avg_x), y: Y(s.avg_y) - 11, "text-anchor": "middle", text: s.season, style: {fill: css("--ink"), fontWeight: 700}}, svg);
+  renderChannel();
+}
+function channelShares(season) {
+  const g = D.heat[season], t = g.flat().reduce((a, v) => a + v, 0) || 1;
+  const rows = (a, b) => g.slice(a, b).flat().reduce((x, v) => x + v, 0) / t;
+  return {right: rows(11, 16), centre: rows(5, 11)};  // rows are 5-yard bands; y >= 55 = right channel, 25-55 = centre
+}
+function renderChannel() {
+  const host = $("#channel"), W = Math.max(280, host.clientWidth), H = 150, m = {l: 32, r: 8, t: 8, b: 20};
+  const svg = svgFor(host, W, H);
+  const x = lin(0, SE.length - 1, m.l, W - m.r), y = lin(0, 0.7, H - m.b, m.t);
+  [0, 0.2, 0.4, 0.6].forEach(v => {
+    el("line", {x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), style: {stroke: css("--line")}}, svg);
+    el("text", {x: m.l - 5, y: y(v) + 4, "text-anchor": "end", text: Math.round(v * 100) + "%", style: {fontSize: "9.5px"}}, svg);
+  });
+  el("line", {x1: x(cur), x2: x(cur), y1: m.t, y2: H - m.b, style: {stroke: css("--rule")}}, svg);
+  const sh = SE.map(s => channelShares(s.season));
+  [["right", css("--orange")], ["centre", css("--blue")]].forEach(([k, col]) => {
+    el("polyline", {points: sh.map((v, i) => `${x(i)},${y(v[k])}`).join(" "), fill: "none", "stroke-width": 2, style: {stroke: col}}, svg);
+    sh.forEach((v, i) => {
+      const c = el("circle", {cx: x(i), cy: y(v[k]), r: i === cur ? 4.5 : 2.5, class: "hit", style: {fill: col}}, svg);
+      bindTip(c, `<b>${SE[i].season}</b><br>right channel ${Math.round(v.right * 100)}% &middot; centre ${Math.round(v.centre * 100)}%`, () => setSeason(i));
+    });
+  });
+  el("text", {x: m.l, y: H - 4, text: "04/05", style: {fontSize: "9.5px"}}, svg);
+  el("text", {x: W - m.r, y: H - 4, "text-anchor": "end", text: "20/21", style: {fontSize: "9.5px"}}, svg);
+}
+function renderMap() {
+  const host = $("#shotmap"), W = Math.max(280, host.clientWidth), o = 6, k = (W - o * 2) / 80, H = Math.round(48 * k + o * 2);
+  const svg = svgFor(host, W, H);
+  const clip = el("clipPath", {id: "half"}, el("defs", {}, svg));
+  el("rect", {x: 0, y: 0, width: W, height: H}, clip);
+  const {X, Y} = halfPitch(svg, k, o);
+  const s = SE[cur];
+  if (mapMode === "shots") {
+    const ss = SH.filter(x => x.season === s.season && !x.pen).sort((a, b) => b.xg - a.xg);
+    const g = ss.filter(x => x.goal).length;
+    $("#mapNote").textContent = `${ss.length} non-penalty shots, ${g} goals from ${fmt(ss.reduce((a, x) => a + x.xg, 0), 1)} xG. Size = xG.`;
+    $("#mapLegend").innerHTML = `<span><span class="sw" style="background:var(--blue)"></span>goal</span><span><span class="sw" style="background:none;border:2px solid var(--gray)"></span>no goal</span>`;
+    ss.forEach(x => {
+      if (x.x < 72) return;
+      const c = el("circle", {cx: X(x.y), cy: Y(x.x), r: Math.max(2, Math.sqrt(x.xg) * 3.3 * k), class: "hit", "stroke-width": x.goal ? 1.2 : 1.4,
+        style: {fill: x.goal ? css("--blue") : "transparent", stroke: x.goal ? css("--card") : css("--gray"), opacity: x.goal ? 0.9 : 1}}, svg);
+      bindTip(c, `<b>${x.goal ? "Goal" : x.outcome}</b> v ${x.opponent}<br>${x.date} &middot; ${x.minute}'<br>${x.body}${x.fk ? ", free kick" : ""} &middot; ${fmt(x.xg)} xG`);
+    });
+  } else {
+    const kk = KP.filter(x => x.season === s.season).sort((a, b) => a.xa - b.xa);
+    $("#mapNote").textContent = `${kk.length} passes that led to a shot (${s.assists} assists, ${fmt(s.xa, 1)} xA). Line ends where the pass was received.`;
+    $("#mapLegend").innerHTML = `<span><span class="sw" style="background:var(--orange)"></span>assist</span><span><span class="sw" style="background:var(--gray)"></span>chance created</span>`;
+    const g = el("g", {"clip-path": "url(#half)"}, svg);
+    kk.forEach(x => {
+      const a = x.assist;
+      const l = el("line", {x1: X(x.y), y1: Y(x.x), x2: X(x.ey), y2: Y(x.ex), class: "hit", "stroke-linecap": "round",
+        "stroke-width": a ? 2.4 : 1.4, style: {stroke: a ? css("--orange") : css("--gray"), opacity: a ? 0.95 : 0.6}}, g);
+      el("circle", {cx: X(x.ey), cy: Y(x.ex), r: a ? 3 : 2, style: {fill: a ? css("--orange") : css("--gray")}}, g);
+      bindTip(l, `<b>${a ? "Assist" : "Chance created"}</b> v ${x.opponent}<br>${x.date}${x.scorer ? `<br>Shot by ${x.scorer}` : ""}<br>${fmt(x.xa)} xG chance`);
+    });
+  }
+}
+
+// ---------- career charts ----------
+const shortS = s => s.slice(2, 4) + "/" + s.slice(7, 9);
+function renderFin() {
+  const host = $("#finChart"), W = Math.max(300, host.clientWidth), H = Math.round(Math.max(240, Math.min(320, W * 0.36)));
+  const svg = svgFor(host, W, H), m = {l: 30, r: 8, t: 14, b: 26};
+  const ymax = Math.max(...SE.map(s => Math.max(s.np_goals, s.npxg))) * 1.1;
+  const bw = (W - m.l - m.r) / SE.length, y = lin(0, ymax, H - m.b, m.t);
+  for (let v = 0; v <= ymax; v += 10) {
+    el("line", {x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), style: {stroke: css("--line")}}, svg);
+    el("text", {x: m.l - 6, y: y(v) + 4, "text-anchor": "end", text: v}, svg);
+  }
+  SE.forEach((s, i) => {
+    const x0 = m.l + i * bw, sel = i === cur, cx = x0 + bw / 2;
+    if (sel) el("rect", {x: x0, y: m.t - 10, width: bw, height: H - m.b - m.t + 10, rx: 4, style: {fill: css("--track")}}, svg);
+    el("rect", {x: x0 + bw * 0.18, y: y(s.np_goals), width: bw * 0.64, height: y(0) - y(s.np_goals), rx: 3,
+      style: {fill: s.np_goals >= s.npxg ? css("--blue") : css("--orange"), opacity: s.minutes < NOISY ? 0.45 : 1}}, svg);
+    el("line", {x1: x0 + bw * 0.1, x2: x0 + bw * 0.9, y1: y(s.npxg), y2: y(s.npxg), "stroke-width": 2.5, style: {stroke: css("--ink2")}}, svg);
+    if (W > 520 || i % 2 === 0) el("text", {x: cx, y: H - 8, "text-anchor": "middle", text: shortS(s.season), style: {fontSize: W < 520 ? "9.5px" : "10.5px", fontWeight: sel ? 700 : 400, fill: sel ? css("--ink") : css("--ink2")}}, svg);
+    const hit = el("rect", {x: x0, y: m.t - 10, width: bw, height: H - m.t, class: "hit", fill: "transparent"}, svg);
+    bindTip(hit, `<b>${s.season}</b> (age ${Math.floor(s.age)})<br>${s.np_goals} non-penalty goals from ${fmt(s.npxg, 1)} xG<br>${s.np_goals - s.npxg >= 0 ? "+" : ""}${fmt(s.np_goals - s.npxg, 1)} vs expectation`, () => setSeason(i));
+  });
+}
+const ROLE = [["dribbles_won_p90", "Dribbles won"], ["prog_passes_p90", "Progressive passes"], ["key_passes_p90", "Key passes"], ["shots_p90", "Shots"]];
+function renderRole() {
+  const host = $("#role");
+  if (!host.children.length) host.innerHTML = ROLE.map(([k, l]) => `<div class="card"><h3>${l}</h3><p class="note" id="rv_${k}"></p><div id="r_${k}"></div></div>`).join("");
+  ROLE.forEach(([key, label]) => {
+    const h = $("#r_" + key), W = Math.max(140, h.clientWidth), H = 120, m = {l: 22, r: 6, t: 8, b: 16};
+    const svg = svgFor(h, W, H);
+    const vals = SE.map(s => s[key]), ymax = Math.max(...vals.filter((v, i) => SE[i].minutes >= NOISY)) * 1.2;
+    const x = lin(0, SE.length - 1, m.l, W - m.r), y = lin(0, ymax, H - m.b, m.t);
+    [0, ymax / 2].forEach(v => {
+      el("line", {x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), style: {stroke: css("--line")}}, svg);
+      el("text", {x: m.l - 4, y: y(v) + 4, "text-anchor": "end", text: fmt(v, 0), style: {fontSize: "9.5px"}}, svg);
+    });
+    el("line", {x1: x(cur), x2: x(cur), y1: m.t, y2: H - m.b, style: {stroke: css("--rule")}}, svg);
+    const pts = SE.map((s, i) => [x(i), y(Math.min(s[key], ymax))]);
+    el("polyline", {points: pts.filter((p, i) => SE[i].minutes >= NOISY).map(p => p.join(",")).join(" "), fill: "none", "stroke-width": 2, style: {stroke: css("--blue")}}, svg);
+    SE.forEach((s, i) => {
+      const noisy = s.minutes < NOISY, sel = i === cur;
+      const c = el("circle", {cx: pts[i][0], cy: pts[i][1], r: sel ? 5 : 3, class: "hit", "stroke-width": 1.5,
+        style: {fill: noisy ? css("--card") : (sel ? css("--orange") : css("--blue")), stroke: noisy ? css("--blue") : css("--card")}}, svg);
+      bindTip(c, `<b>${s.season}</b><br>${fmt(s[key])} ${label.toLowerCase()} per 90${noisy ? "<br>(under 900 minutes)" : ""}`, () => setSeason(i));
+    });
+    el("text", {x: m.l, y: H - 2, text: "04/05", style: {fontSize: "9.5px"}}, svg);
+    el("text", {x: W - m.r, y: H - 2, "text-anchor": "end", text: "20/21", style: {fontSize: "9.5px"}}, svg);
+    $("#rv_" + key).innerHTML = `${SE[cur].season}: <b style="color:var(--ink)">${fmt(SE[cur][key])}</b> per 90`;
+  });
+}
+function renderAge() {
+  const host = $("#ageChart"), W = Math.max(300, host.clientWidth), H = Math.round(Math.max(230, Math.min(300, W * 0.34)));
+  const svg = svgFor(host, W, H), m = {l: 34, r: 12, t: 12, b: 30};
+  const ok = SE.filter(s => s.minutes >= NOISY);
+  const act = s => (s.np_goals + s.assists) / s.minutes * 90, exp = s => (s.npxg + s.xa) / s.minutes * 90;
+  const ymax = Math.max(...ok.map(s => Math.max(act(s), exp(s)))) * 1.12;
+  const x = lin(Math.min(...ok.map(s => s.age)) - 0.5, Math.max(...ok.map(s => s.age)) + 0.5, m.l, W - m.r), y = lin(0, ymax, H - m.b, m.t);
+  for (let v = 0; v <= ymax; v += 0.5) {
+    el("line", {x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), style: {stroke: css("--line")}}, svg);
+    el("text", {x: m.l - 6, y: y(v) + 4, "text-anchor": "end", text: fmt(v, 1)}, svg);
+  }
+  ok.forEach(s => el("text", {x: x(s.age), y: H - 12, "text-anchor": "middle", text: Math.floor(s.age), style: {fontSize: "10px"}}, svg));
+  el("text", {x: (m.l + W - m.r) / 2, y: H, "text-anchor": "middle", text: "Age at start of season", style: {fontSize: "10px"}}, svg);
+  [[exp, css("--gray"), "expected"], [act, css("--blue"), "actual"]].forEach(([f, col, nm]) => {
+    el("polyline", {points: ok.map(s => `${x(s.age)},${y(f(s))}`).join(" "), fill: "none", "stroke-width": 2.2, style: {stroke: col}}, svg);
+    ok.forEach(s => {
+      const sel = s === SE[cur];
+      const c = el("circle", {cx: x(s.age), cy: y(f(s)), r: sel ? 6 : 3.5, class: "hit", "stroke-width": 1.5, style: {fill: sel ? css("--orange") : col, stroke: css("--card")}}, svg);
+      bindTip(c, `<b>${s.season}</b>, age ${Math.floor(s.age)}<br>${nm}: ${fmt(f(s))} per 90`, () => setSeason(SE.indexOf(s)));
+    });
+  });
+  const pk = ok.reduce((a, b) => act(b) > act(a) ? b : a);
+  el("text", {x: x(pk.age), y: y(act(pk)) - 10, "text-anchor": "middle", text: `peak ${pk.season}`, style: {fill: css("--ink"), fontWeight: 700, fontSize: "10.5px"}}, svg);
+}
+
+function renderMethods() {
+  const s0708 = SE.find(s => s.season === "2007/2008");
+  const items = [
+    `<b>Data:</b> StatsBomb Open Data, La Liga, every Barcelona match from 2004/05 to 2020/21 in which Messi appeared (${SE.reduce((a, s) => a + s.matches, 0)} matches). StatsBomb collected the older seasons retrospectively from video.`,
+    `<b>Coverage check:</b> season goal totals match his official La Liga record in 16 of 17 seasons. 2007/08 is short (${s0708.goals} of 10 goals, ${s0708.matches} of 28 appearances) because one match is missing from the open data, so the career total reads 472 against the official 474.`,
+    `<b>xG and xA:</b> StatsBomb's model, applied to every shot including the older seasons. xA = the xG of shots that came directly from his passes. Penalties are excluded from npxG and from the finishing comparison.`,
+    `<b>Minutes:</b> from lineups, first appearance to substitution or final whistle. Seasons under 900 minutes (his first two) are shown but treated as noisy.`,
+    `<b>Positions:</b> the label is StatsBomb's lineup position with the most minutes. It records "Right Wing" for many false-9 seasons, so the touch map and average-position trail are the better guide to where he actually played.`,
+    `<b>Progressive actions:</b> passes and carries that move the ball at least 25% closer to goal, starting outside Barcelona's own 40%; carries must cover 5+ yards.`,
+    `<b>Ageing curve:</b> one player, so it describes Messi rather than a general rule. Team quality changed around him (Guardiola coached Barcelona from 2008 to 2012), which moves his assist numbers as much as his own level does.`,
+  ];
+  $("#methods").innerHTML = items.map(i => `<li>${i}</li>`).join("");
+}
+
+function init() {
+  renderTop(); renderMethods();
+  $("#slider").max = SE.length - 1;
+  $("#slider").addEventListener("input", e => setSeason(+e.target.value));
+  $("#segShots").onclick = () => { mapMode = "shots"; $("#segShots").setAttribute("aria-pressed", true); $("#segKP").setAttribute("aria-pressed", false); renderMap(); };
+  $("#segKP").onclick = () => { mapMode = "kp"; $("#segKP").setAttribute("aria-pressed", true); $("#segShots").setAttribute("aria-pressed", false); renderMap(); };
+  $("#play").onclick = () => {
+    if (timer) { clearInterval(timer); timer = null; $("#play").innerHTML = "&#9654;"; return; }
+    if (cur >= SE.length - 1) setSeason(0);
+    $("#play").innerHTML = "&#10074;&#10074;";
+    timer = setInterval(() => {
+      if (cur >= SE.length - 1) { clearInterval(timer); timer = null; $("#play").innerHTML = "&#9654;"; return; }
+      setSeason(cur + 1);
+    }, 1100);
+  };
+  addEventListener("keydown", e => { if (e.target.tagName !== "INPUT") { if (e.key === "ArrowRight") setSeason(cur + 1); if (e.key === "ArrowLeft") setSeason(cur - 1); } });
+  setSeason(cur);
+  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => setSeason(cur), 120); });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => setSeason(cur));
+}
+init();
+</script>
+</body>
+</html>
